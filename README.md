@@ -1,7 +1,7 @@
 Javascript-Server-Error-And-Log
 ===============================
 
-Server to capture errors and logs of javascript from web.
+Server to capture errors and logs of javascript from web with MondoDB.
 
 Javascript code to capture javascrip errors:
 
