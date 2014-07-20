@@ -5,6 +5,10 @@ Server to capture errors and logs of javascript from web.
 
 Javascript code to capture javascrip errors:
 
+    Javascript file:
+    https://raw.githubusercontent.com/warsclon/Javascript-Server-Error-And-Log/master/public/captureErrors_v1.js
+
+
     var SERVER_DIRECTION = "http://127.0.0.1:8888";
     var SOFTWARE_VERSION = 1;
     var LOG_CONSOLE_BROWSER = true;
@@ -21,6 +25,9 @@ Preview console browser message:
             
             
 Javascript code to send log:
+
+        Javascript file:
+        https://raw.githubusercontent.com/warsclon/Javascript-Server-Error-And-Log/master/public/sendLogs_v1.js
 
         var SERVER_DIRECTION = "http://127.0.0.1:8888";
         var SOFTWARE_VERSION = 1;
