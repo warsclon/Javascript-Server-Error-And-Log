@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+ <html> 
+  <head>
+    <title>List Apps - Javascript Server</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="/css/bootstrap-responsive.css" rel="stylesheet">
+ 
+  </head>
+
+<body> 
+
+<div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="#">List Apps</a>
+    <ul class="nav">
+	  <li ><a href="/logout">Logout</a></li>
+  </div>
+</div>
+ 
+<p>
+<div class="container">
+<table class="table table-bordered" width="70%" align="center">
+    <tr>
+        <td align="center">
+            Pages test
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            <a href="testError.html">Test Error</a>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            <a href="testLog.html">Test Log</a>
+        </td>
+    </tr>
+
+</table>
+
+<p>
+  
+<table class="table table-bordered" width="70%" align="center">
+    <tr>
+        <td align="center">
+            Apps
+        </td>
+    </tr>
+<% if (list != null && list.length) {
+
+%>
+  <% list.forEach(function(element){
+	if (dbname+'.system.indexes' != element.name) {
+		%>
+		<tr>
+			<td align="center">
+				<a href="/logs/<%= element.name.substring(dbname.length+1) %>"><%= element.name.substring(dbname.length+1) %></a>
+			</td> 
+		</tr>
+  <%}  }) %>
+<%
+
+    }
+%>
+</table>
+</div>
+
+
+  
+</body> 
+</html> 
+
+

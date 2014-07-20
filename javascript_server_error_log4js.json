@@ -1,0 +1,6 @@
+{
+    "appenders": [
+        { "type": "console"  },
+        { "type": "file", "filename": "javascript_server_error.log", "backups": 10, "maxLogSize": 20480000}
+    ]
+}

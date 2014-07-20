@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+ <html> 
+  <head>
+    <title>Logs Javascripts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="/css/blue/style.css" rel="stylesheet" media="screen">
+	<script type="text/javascript" src="/js/jquery-1.9.js"></script> 
+	<script type="text/javascript" src="/js/jquery.metadata.js"></script> 
+	<script type="text/javascript" src="/js/tablesorter-mini.js"></script>
+    <!-- jqplot -->
+    <script type="text/javascript" src="/jqplot/jquery.jqplot.min.js"></script>
+
+    <script type="text/javascript" src="/jqplot/plugins/jqplot.barRenderer.min.js"></script>
+    <script type="text/javascript" src="/jqplot/plugins/jqplot.pieRenderer.min.js"></script>
+    <script type="text/javascript" src="/jqplot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+    <script type="text/javascript" src="/jqplot/plugins/jqplot.pointLabels.min.js"></script>
+	
+    <link rel="stylesheet" type="text/css" hrf="/jqplot/jquery.jqplot.min.css" /> 
+
+    
+  </head>
+ 	<script>
+	$(document).ready(function() 
+    { 
+        $("#tabletLogs").tablesorter(); 
+    } 
+); 
+
+
+
+   
+	</script>
+    
+<body>
+  
+<div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="#">Logs</a>
+    <ul class="nav">
+	  <li><a href="/apps">Select App</a></li>	
+	  <li><a href="/logsexport/<%= appid %>">Export all logs(json format)</a></li>
+	  <li ><a href="/logout">Logout</a></li>
+  </div>
+</div>
+
+<p>
+
+
+<!-- graphic -->
+<table border="1">
+	<tr>
+	<%
+	if (user_agent.length) {
+	%>
+        <td>
+            <div style="margin-top:10px;margin-bottom:10px;margin-right:10px;margin-left:10px;">
+                <div id="chart1" style="height:150px;width:600px;"></div>
+            </div>
+        </td>
+	<%
+	}
+	%>
+	<%
+	if (appName.length) {
+	%>
+		<td>
+			<div style="margin-top:10px;margin-bottom:10px;margin-right:10px;margin-left:10px;">
+			    <div id="chart_android" style="height:150px;width:600px;"></div>
+			</div>
+		</td> 
+	<%
+	}
+	%>
+	</tr>
+	<%
+	if (dates.length) {
+	%>
+	<tr>
+		<td colspan="2">
+			<div style="margin-top:10px;margin-bottom:10px;margin-right:10px;margin-left:10px;">
+			    <div id="chart_dates" style="height:150px;width:900px;"></div>
+			</div>
+		</td> 
+	</tr>
+	<%
+	}
+	%>
+
+</table>
+<!-- end graphic -->
+<div style="margin-top:10px;margin-bottom:10px;margin-right:10px;margin-left:10px;">
+
+<table id="tabletLogs" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
+<thead> 
+<tr> 
+    <th>Date</th>
+    <th>Message</th>
+    <th>Type</th>
+    <th>App Version</th>
+    <th>Platform</th> 
+    <th>User Agent</th> 
+    <th>Detail</th> 
+</tr> 
+</thead> 
+<tbody> 
+<% if (list.length) { %>
+  <% list.forEach(function(element){ %>
+	<tr> 
+		<th><%= element.date %></th>
+        <th><%= element.message %></th>
+        <th><%= element.type %></th>
+		<th><%= element.version_app %></th>
+		<th><%= element.platform %></th> 
+		<th><%= element.userAgent %></th> 
+		<th>
+			<a class="btn btn-mini btn-block" href="/logs/<%= appid %>/<%= element._id %>">
+				Detail
+			</a>
+		</th> 
+	</tr> 
+  
+   
+	  
+  <% }) %>
+  </ul>
+<% } %>
+</tbody> 
+</table>
+</div>
+
+
+<% 
+//build graphics
+if (user_agent.length) { 
+    
+    var s1 = "";
+    var ticks = "";
+
+    user_agent.forEach(function(mobile){
+        var tmpUserAgent  = mobile._id.userAgent;
+        if (tmpUserAgent.length > 10) {
+            var tmpUserAgent = mobile._id.userAgent.substring(0, 9);
+        }
+        var tmpParam = "'"+tmpUserAgent+"'";
+        ticks = ticks+tmpParam+",";
+        s1 = s1+mobile.number+",";
+    }); 
+    
+    ticks = ticks.substring(0,ticks.length-1);
+    s1 = s1.substring(0,s1.length-1);
+    
+    %>
+  
+    <script>
+    $(document).ready(function(){         
+        $.jqplot.config.enablePlugins = true;       
+        var s1 = [<%- s1 %>];
+        var ticks= [<%- ticks %>];
+        plot1 = $.jqplot('chart1', [s1], {             
+    	// Only animate if we're not using excanvas (not in IE 7 or IE 8)..             
+    	animate: !$.jqplot.use_excanvas,
+        //tickOptions: {show: false},
+        title: 'User Agent',
+
+
+            axesDefaults: {
+                mark: 'cross',
+                markSize: 4,
+                showTicks: true,        // wether or not to show the tick labels,
+                showTickMarks: true   // wether or not to show the tick marks
+            },
+
+
+    	seriesDefaults:{                 
+    	renderer:$.jqplot.BarRenderer,                 
+    	pointLabels: { show: false }             },
+    	axes: {                 
+    	xaxis: {                     
+    	renderer: $.jqplot.CategoryAxisRenderer,                     
+    	ticks: ticks                 }             },             
+    	highlighter: { show: false }         });              
+            /*
+        	$('#chart1').bind('jqplotDataClick',              
+        	function (ev, seriesIndex, pointIndex, data) {                 
+        	$('#info1').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);             }         );     
+            */
+    	});
+    
+    </script>    
+  
+  
+  
+<% } %>    
+
+
+<% 
+//build graphics
+if (appName.length) { 
+    
+    var s2= "";
+    var ticks2 = "";
+
+    appName.forEach(function(app){ 
+        ticks2 = ticks2+"'"+app._id.appName+"'"+",";
+        s2 = s2+app.number+",";
+    }); 
+    
+    ticks2 = ticks2.substring(0,ticks2.length-1);
+    s2 = s2.substring(0,s2.length-1);
+    
+    %>
+  
+    <script>
+    $(document).ready(function(){         
+        $.jqplot.config.enablePlugins = true;       
+        var s2 = [<%- s2 %>];
+        var ticks2 = [<%- ticks2 %>];
+        plot1 = $.jqplot('chart_android', [s2], {             
+    	// Only animate if we're not using excanvas (not in IE 7 or IE 8)..             
+    	animate: !$.jqplot.use_excanvas, 
+        title: 'App Name',
+    	seriesDefaults:{                 
+    	renderer:$.jqplot.BarRenderer,                 
+    	pointLabels: { show: false }             },
+    	axes: {                 
+    	xaxis: {                     
+    	renderer: $.jqplot.CategoryAxisRenderer,                     
+    	ticks: ticks2                 }             },             
+    	highlighter: { show: false }         });              
+            /*        
+        	$('#chart1').bind('jqplotDataClick',              
+        	function (ev, seriesIndex, pointIndex, data) {                 
+        	$('#info1').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);             }         );     
+            */
+        
+    	}); 
+    
+    </script>    
+  
+  
+  
+<% } %>
+  
+  
+<% 
+//build graphics
+if (dates.length) { 
+    
+    var s3= "";
+    var ticks3 = "";
+
+    dates.forEach(function(date){ 
+        ticks3 = ticks3+"'"+date._id.year+"/"+date._id.month+"'"+",";
+        s3 = s3+date.number+",";
+    }); 
+    
+    ticks3= ticks3.substring(0,ticks3.length-1);
+    s3 = s3.substring(0,s3.length-1);
+    
+    %>
+  
+    <script>
+    $(document).ready(function(){         
+        $.jqplot.config.enablePlugins = true;       
+        var s3 = [<%- s3 %>];
+        var ticks3 = [<%- ticks3 %>];
+        plot1 = $.jqplot('chart_dates', [s3], {             
+    	// Only animate if we're not using excanvas (not in IE 7 or IE 8)..             
+    	animate: !$.jqplot.use_excanvas, 
+        title: 'Dates',
+    	seriesDefaults:{                 
+    	renderer:$.jqplot.BarRenderer,                 
+    	pointLabels: { show: false }             },
+    	axes: {                 
+    	xaxis: {                     
+    	renderer: $.jqplot.CategoryAxisRenderer,                     
+    	ticks: ticks3                 }             },             
+    	highlighter: { show: false }         });              
+             /*
+        	$('#chart1').bind('jqplotDataClick',              
+        	function (ev, seriesIndex, pointIndex, data) {                 
+        	$('#info1').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);             }         );     
+           */
+        
+    	}); 
+    
+    </script>    
+  
+  
+  
+<% } %>
+
+</body> 
+</html> 
+
+

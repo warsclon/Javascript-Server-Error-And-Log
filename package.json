@@ -1,0 +1,36 @@
+{
+  "name": "JavascriptServerErrorAndLog",
+  "version": "0.5.0",
+  "description": "Server to recive javascript errors and logs",
+  "main": "serverErrorJS.js",
+  "dependencies": {
+    "moment": "~2.6.0",
+    "ejs": "~1.0.0",
+    "emailjs": "~0.3.8",
+    "basic-auth": "~0.0.1",
+    "mongodb": "~1.3.23",
+    "http-auth": "~2.1.7",
+    "body-parser": "~1.0.2",
+    "express": "~4.0.0",
+    "log4js": "~0.6.13",
+    "node-properties-parser": "~0.0.2",
+    "cookie-parser": "~1.0.1",
+    "async": "~0.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "javascript",
+    "server",
+    "error",
+    "logs"
+  ],
+  "author": "Diego Martin Moreno",
+  "license": "The MIT License"
+}

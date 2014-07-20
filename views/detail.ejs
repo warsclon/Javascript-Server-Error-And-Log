@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+ <html> 
+  <head>
+    <title>Detail Javascript Error Server</title>
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="/css/bootstrap-responsive.css" rel="stylesheet">
+<script>
+function myFunction() {
+
+	$('#myModal').modal('show');
+
+}
+
+function close() {
+
+	$('#myModal').modal('hide');
+}
+
+function deleteYes() {
+	close();
+	window.location = "/logs/<%= appid %>/<%= log._id %>/delete";
+}
+</script>
+  </head>
+
+<body> 
+
+
+<div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="#">Detail</a>
+    <ul class="nav">
+	  <li><a href="/apps">Select App</a></li>
+	  <li><a href="/logs/<%= appid %>">Logs App</a></li>
+	  <li><a href="/logsexport/<%= appid %>/<%= log._id  %>">Export log (json format)</a></li>
+	  <li ><a href="/logout">Logout</a></li>
+  </div>
+</div>
+
+<p>
+<div class="container">
+<div style="margin-top:10px;margin-bottom:10px;margin-right:20px;margin-left:20px;">
+<br>
+    <button class="btn btn-primary" type="button" onclick="javascript:myFunction()">
+      Delete
+    </button>
+<p>
+
+<h3>Info Event:</h3>
+<p>
+    <table class="table table-striped">
+        <tbody>
+    <tr>
+        <td>
+            <b>url</b>
+        </td>
+        <td>
+            <%= log.url %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b>lineNumber</b>
+        </td>
+        <td>
+            <%= log.lineNumber %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b>message</b>
+        </td>
+        <td>
+            <%= log.message %>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Info browser:</h3>
+<p>
+
+<table class="table table-striped">
+<tbody>
+<tr>
+    <td>
+        <b>app</b>
+    </td>
+    <td>
+        <%= log.app %>
+    </td>
+</tr>
+<tr>
+    <td>
+        <b>appCodeName</b>
+    </td>
+    <td>
+        <%= log.appCodeName %>
+    </td>
+</tr>
+<tr>
+    <td>
+        <b>appVersion</b>
+    </td>
+    <td>
+        <%= log.appVersion %>
+    </td>
+</tr>
+<tr>
+    <td>
+        <b>colorDepth</b>
+    </td>
+    <td>
+        <%= log.colorDepth %>
+    </td>
+</tr>
+<tr>
+    <td>
+        <b>cookieEnabled</b>
+    </td>
+    <td>
+        <%= log.cookieEnabled %>
+    </td>
+</tr>
+<tr>
+    <td>
+        <b>date</b>
+    </td>
+    <td>
+        <%= log.date %>
+    </td>
+</tr>
+<tr>
+    <td>
+        <b>domain</b>
+    </td>
+    <td>
+        <%= log.domain %>
+    </td>
+</tr>
+<tr>
+    <td>
+        <b>height</b>
+    </td>
+    <td>
+        <%= log.height %>
+    </td>
+</tr>
+<tr>
+    <td>
+        <b>width</b>
+    </td>
+    <td>
+        <%= log.width %>
+    </td>
+</tr>
+<tr>
+    <td>
+        <b>language</b>
+    </td>
+    <td>
+        <%= log.language %>
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>pixelDepth</b>
+    </td>
+    <td>
+        <%= log.pixelDepth %>
+    </td>
+</tr>
+<tr>
+    <td>
+        <b>platform</b>
+    </td>
+    <td>
+        <%= log.platform %>
+    </td>
+</tr>
+<tr>
+    <td>
+        <b>product</b>
+    </td>
+    <td>
+        <%= log.product %>
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <b>userAgent</b>
+    </td>
+    <td>
+        <%= log.userAgent %>
+    </td>
+</tr>
+<tr>
+    <td>
+        <b>version_app</b>
+    </td>
+    <td>
+        <%= log.version_app %>
+    </td>
+</tr>
+</tbody>
+</table>
+
+
+
+</div>
+
+<div id="myModal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Delete log</h3>
+  </div>
+  <div class="modal-body">
+    <p>Do you what delete this log?</p>
+  </div>
+  <div class="modal-footer">
+    <a href="javascript:close()" class="btn">Close</a>
+    <a href="javascript:deleteYes()" class="btn btn-primary">Delete</a>
+  </div>
+</div>
+
+
+
+
+ <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery-1.9.js"></script>
+    <script src="/js/bootstrap-transition.js"></script>
+    <script src="/js/bootstrap-modal.js"></script>
+
+</body> 
+</html> 
+
+
