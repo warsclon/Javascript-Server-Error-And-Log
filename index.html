@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Javascript-server-error-and-log by warsclon</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/warsclon/Javascript-Server-Error-And-Log">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Javascript-server-error-and-log</h1>
+            <h2>Server to capture errors and Logs of javascript from web</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/warsclon/Javascript-Server-Error-And-Log/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/warsclon/Javascript-Server-Error-And-Log/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>
+<a name="javascript-server-error-and-log" class="anchor" href="#javascript-server-error-and-log"><span class="octicon octicon-link"></span></a>Javascript-Server-Error-And-Log</h1>
+
+<p>Server to capture errors and logs of javascript from web.</p>
+
+<p>Javascript code to capture javascrip errors:</p>
+
+<pre><code>Javascript file:
+https://raw.githubusercontent.com/warsclon/Javascript-Server-Error-And-Log/master/public/captureErrors_v1.js
+
+
+var SERVER_DIRECTION = "http://127.0.0.1:8888";
+var SOFTWARE_VERSION = 1;
+var LOG_CONSOLE_BROWSER = true;
+var DEBUG_HTTP = true;
+var NAME_DATABASE_MONGODB = "TestError";
+
+var captureErrors = CaptureErrors();
+captureErrors.init(SERVER_DIRECTION, SOFTWARE_VERSION, LOG_CONSOLE_BROWSER, DEBUG_HTTP, NAME_DATABASE_MONGODB);
+</code></pre>
+
+<p>Preview console browser message:</p>
+
+<pre><code>json:{"app":"TestError","version_app":1,"date":"Thu Jun 19 2014 19:38:38 GMT+0200 (Hora de verano romance)","appCodeName":"Mozilla","appName":"Netscape","appVersion":"5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2054.3 Safari/537.36","language":"es","cookieEnabled":true,"platform":"Win32","product":"Gecko","userAgent":"Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2054.3 Safari/537.36","height":1080,"width":1920,"pixelDepth":24,"colorDepth":24,"type":"error","message":"Uncaught ReferenceError: tt is not defined","url":"http://127.0.0.1:8888/testError.html","lineNumber":18} captureErrors_v1.js:75
+result_4:{"insert":"ok"}
+</code></pre>
+
+<p>Javascript code to send log:</p>
+
+<pre><code>    Javascript file:
+    https://raw.githubusercontent.com/warsclon/Javascript-Server-Error-And-Log/master/public/sendLogs_v1.js
+
+    var SERVER_DIRECTION = "http://127.0.0.1:8888";
+    var SOFTWARE_VERSION = 1;
+    var LOG_CONSOLE_BROWSER =true;
+    var NAME_DATABASE_MONGODB = "TestLog";
+    var logger = new ServerLog();
+    logger.init(SERVER_DIRECTION, SOFTWARE_VERSION, LOG_CONSOLE_BROWSER, NAME_DATABASE_MONGODB);
+
+    function testLog() {
+        logger.write(document.getElementById('message').value);
+    }
+</code></pre>
+
+<p>Preview console browser message:</p>
+
+<pre><code>json:{"app":"TestLog","version_app":1,"date":"Thu Jun 19 2014 19:30:04 GMT+0200 (Hora de verano romance)","appCodeName":"Mozilla","appName":"Netscape","appVersion":"5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2054.3 Safari/537.36","language":"es","cookieEnabled":true,"platform":"Win32","product":"Gecko","userAgent":"Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2054.3 Safari/537.36","height":1080,"width":1920,"pixelDepth":24,"colorDepth":24,"type":"log","message":"test"}
+result:{"insert":"ok"}
+</code></pre>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/warsclon">warsclon</a> can be found on <a href="https://github.com/warsclon/Javascript-Server-Error-And-Log">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
