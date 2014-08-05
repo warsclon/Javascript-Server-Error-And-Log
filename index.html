@@ -2,9 +2,9 @@
 <html>
 
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Javascript-server-error-and-log : Server to capture errors and Logs of javascript from web" />
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Javascript-server-error-and-log : Server to capture errors and Logs of javascript from web">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
@@ -32,56 +32,213 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h1>
-<a name="javascript-server-error-and-log" class="anchor" href="#javascript-server-error-and-log"><span class="octicon octicon-link"></span></a>Javascript-Server-Error-And-Log</h1>
+<a name="javascript-server-error-and-log-v-10" class="anchor" href="#javascript-server-error-and-log-v-10"><span class="octicon octicon-link"></span></a>Javascript-Server-Error-And-Log (v 1.0)</h1>
 
-<p>Server to capture errors and logs of javascript from web.</p>
+<p>Server and Javascript libraries to capture errors and logs of javascript applications as FirefoxOS or Web.</p>
 
-<p>Javascript code to capture javascrip errors:</p>
+<p>Save all the crash reports and logs in your own server.</p>
 
-<pre><code>Javascript file:
-https://raw.githubusercontent.com/warsclon/Javascript-Server-Error-And-Log/master/public/captureErrors_v1.js
+<p>The base is use window.onerror to capture javascripts errors and use Ajax to comunication.</p>
 
+<h2>
+<a name="technologies-used" class="anchor" href="#technologies-used"><span class="octicon octicon-link"></span></a>Technologies Used</h2>
 
+<p>Server = [node.js, express 4.0, ejs, mongodb, emailjs, node-properties-parser, moment, ,http-auth, ,body-parser, cookie-parser, async]</p>
+
+<p>Client = [bootstrap, jquery, tablesorter, jqplot]</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<ol>
+<li>Download and unzip (or git clone) into a directory.</li>
+<li>Run "$ npm install"</li>
+<li>Configure /javascript_server_error.properties with mongodb, port web, user and password access and email credentials.</li>
+<li>
+<p>Run app via "$ node serverErrorJS.js"</p>
+
+<h2>
+<a name="philosophy" class="anchor" href="#philosophy"><span class="octicon octicon-link"></span></a>Philosophy</h2>
+</li>
+</ol><ul>
+<li>Capture errors in FirefoxOS applications.</li>
+<li>Build a Server to save javascripts errors and logs.</li>
+<li>Write using modern tecnologies as Node.js and Mongodb.</li>
+<li>Simple configuration with a only one properties file.</li>
+<li>
+<p>Interface using Bootstrap.</p>
+
+<h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
+</li>
+<li><p>Basic front end web pages.</p></li>
+<li>Send emails when receive error and/or log.</li>
+<li>Login system to protect access.</li>
+<li>Export all reports in json format.</li>
+<li>Export detail report in json format.</li>
+<li>Delete report.</li>
+<li>
+<p>Multiple applications in the same server.</p>
+
+<h2>
+<a name="how-to-use-in-javascript" class="anchor" href="#how-to-use-in-javascript"><span class="octicon octicon-link"></span></a>How to use in Javascript</h2>
+</li>
+</ul><p>Javascript code to capture errors:</p>
+
+<pre><code>//Public direction of your server
 var SERVER_DIRECTION = "http://127.0.0.1:8888";
+//Version of your application
 var SOFTWARE_VERSION = 1;
+//See log in browser console
 var LOG_CONSOLE_BROWSER = true;
+//See XMLHttp comunication in browser console
 var DEBUG_HTTP = true;
+//Name of data base of errors in mongodb
 var NAME_DATABASE_MONGODB = "TestError";
 
+//Create and init capture errors.
 var captureErrors = CaptureErrors();
 captureErrors.init(SERVER_DIRECTION, SOFTWARE_VERSION, LOG_CONSOLE_BROWSER, DEBUG_HTTP, NAME_DATABASE_MONGODB);
 </code></pre>
 
-<p>Preview console browser message:</p>
+<p>Javascript file if you want to use:</p>
 
-<pre><code>json:{"app":"TestError","version_app":1,"date":"Thu Jun 19 2014 19:38:38 GMT+0200 (Hora de verano romance)","appCodeName":"Mozilla","appName":"Netscape","appVersion":"5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2054.3 Safari/537.36","language":"es","cookieEnabled":true,"platform":"Win32","product":"Gecko","userAgent":"Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2054.3 Safari/537.36","height":1080,"width":1920,"pixelDepth":24,"colorDepth":24,"type":"error","message":"Uncaught ReferenceError: tt is not defined","url":"http://127.0.0.1:8888/testError.html","lineNumber":18} captureErrors_v1.js:75
-result_4:{"insert":"ok"}
+<pre><code>https://raw.githubusercontent.com/warsclon/Javascript-Server-Error-And-Log/master/public/captureErrors_v1.js
 </code></pre>
+
+<p>Preview console browser message:
+    json:{"app":"TestError","version_app":1,"date":"Thu Jun 19 2014 19:38:38 GMT+0200 (Hora de verano romance)","appCodeName":"Mozilla","appName":"Netscape","appVersion":"5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2054.3 Safari/537.36","language":"es","cookieEnabled":true,"platform":"Win32","product":"Gecko","userAgent":"Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2054.3 Safari/537.36","height":1080,"width":1920,"pixelDepth":24,"colorDepth":24,"type":"error","message":"Uncaught ReferenceError: tt is not defined","url":"<a href="http://127.0.0.1:8888/testError.html%22,%22lineNumber%22:18">http://127.0.0.1:8888/testError.html","lineNumber":18</a>} captureErrors_v1.js:75
+    result_4:{"insert":"ok"}</p>
 
 <p>Javascript code to send log:</p>
 
-<pre><code>    Javascript file:
-    https://raw.githubusercontent.com/warsclon/Javascript-Server-Error-And-Log/master/public/sendLogs_v1.js
-
+<pre><code>    //Public direction of your server
     var SERVER_DIRECTION = "http://127.0.0.1:8888";
+    //Version of your application
     var SOFTWARE_VERSION = 1;
+    //See log in browser console
     var LOG_CONSOLE_BROWSER =true;
+    //Name of data base of errors in mongodb
     var NAME_DATABASE_MONGODB = "TestLog";
+
     var logger = new ServerLog();
     logger.init(SERVER_DIRECTION, SOFTWARE_VERSION, LOG_CONSOLE_BROWSER, NAME_DATABASE_MONGODB);
 
     function testLog() {
+        //Send log to server
         logger.write(document.getElementById('message').value);
     }
 </code></pre>
 
-<p>Preview console browser message:</p>
+<p>Javascript file if you want to use:</p>
 
-<pre><code>json:{"app":"TestLog","version_app":1,"date":"Thu Jun 19 2014 19:30:04 GMT+0200 (Hora de verano romance)","appCodeName":"Mozilla","appName":"Netscape","appVersion":"5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2054.3 Safari/537.36","language":"es","cookieEnabled":true,"platform":"Win32","product":"Gecko","userAgent":"Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2054.3 Safari/537.36","height":1080,"width":1920,"pixelDepth":24,"colorDepth":24,"type":"log","message":"test"}
-result:{"insert":"ok"}
+<pre><code>https://raw.githubusercontent.com/warsclon/Javascript-Server-Error-And-Log/master/public/sendLogs_v1.js
 </code></pre>
 
-<p>Init web:</p>
+<p>Preview console browser message:
+    json:{"app":"TestLog","version_app":1,"date":"Thu Jun 19 2014 19:30:04 GMT+0200 (Hora de verano romance)","appCodeName":"Mozilla","appName":"Netscape","appVersion":"5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2054.3 Safari/537.36","language":"es","cookieEnabled":true,"platform":"Win32","product":"Gecko","userAgent":"Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2054.3 Safari/537.36","height":1080,"width":1920,"pixelDepth":24,"colorDepth":24,"type":"log","message":"test"}
+    result:{"insert":"ok"}</p>
+
+<h2>
+<a name="config-javascript_server_errorproperties" class="anchor" href="#config-javascript_server_errorproperties"><span class="octicon octicon-link"></span></a>Config javascript_server_error.properties</h2>
+
+<h1>
+<a name="configuration-web" class="anchor" href="#configuration-web"><span class="octicon octicon-link"></span></a>CONFIGURATION WEB</h1>
+
+<h1>
+<a name="web-server-port" class="anchor" href="#web-server-port"><span class="octicon octicon-link"></span></a>Web server port</h1>
+
+<p>port_web = 8888</p>
+
+<h1>
+<a name="web-access-user" class="anchor" href="#web-access-user"><span class="octicon octicon-link"></span></a>Web access user</h1>
+
+<p>username = test</p>
+
+<h1>
+<a name="web-acess-password" class="anchor" href="#web-acess-password"><span class="octicon octicon-link"></span></a>Web acess password</h1>
+
+<p>password = test</p>
+
+<h1>
+<a name="cookie-config" class="anchor" href="#cookie-config"><span class="octicon octicon-link"></span></a>Cookie config</h1>
+
+<p>key = javacript_server_errors_and_logs
+secret = 9nfC0BASM3Ah7UqFO837h7eW2iiA13GC</p>
+
+<h1>
+<a name="configuration-mongodb" class="anchor" href="#configuration-mongodb"><span class="octicon octicon-link"></span></a>CONFIGURATION MONGODB</h1>
+
+<h1>
+<a name="port-mongodb" class="anchor" href="#port-mongodb"><span class="octicon octicon-link"></span></a>port mongodb</h1>
+
+<p>mongodb_port = 27017</p>
+
+<h1>
+<a name="ip-mongodb" class="anchor" href="#ip-mongodb"><span class="octicon octicon-link"></span></a>Ip mongodb</h1>
+
+<p>mongodb_ip = localhost</p>
+
+<h1>
+<a name="name-data-base-javascript-errors-and-logs" class="anchor" href="#name-data-base-javascript-errors-and-logs"><span class="octicon octicon-link"></span></a>Name Data base javascript errors and logs</h1>
+
+<p>name_database = javascript_server_errors_and_logs</p>
+
+<h1>
+<a name="configuration-mail" class="anchor" href="#configuration-mail"><span class="octicon octicon-link"></span></a>CONFIGURATION MAIL</h1>
+
+<h1>
+<a name="yes-or-no-if-want-send-email" class="anchor" href="#yes-or-no-if-want-send-email"><span class="octicon octicon-link"></span></a>yes or no if want send email</h1>
+
+<h1>
+<a name="when-you-recive-error" class="anchor" href="#when-you-recive-error"><span class="octicon octicon-link"></span></a>when you recive error</h1>
+
+<p>send_mail_error = no</p>
+
+<h1>
+<a name="when-you-recive-log" class="anchor" href="#when-you-recive-log"><span class="octicon octicon-link"></span></a>when you recive log</h1>
+
+<p>send_mail_log = no</p>
+
+<h1>
+<a name="config-connection-email-server" class="anchor" href="#config-connection-email-server"><span class="octicon octicon-link"></span></a>config connection email server</h1>
+
+<p>user_mail= <a href="mailto:john.smith@gmail.com">john.smith@gmail.com</a>
+password_mail = password_mail
+host =smtp.gmail.com
+ssl = true</p>
+
+<h1>
+<a name="config-email" class="anchor" href="#config-email"><span class="octicon octicon-link"></span></a>config email</h1>
+
+<p>subject = Javascript Server Errors And Logs
+from = <a href="mailto:javascript_server_error@sinclinal.com">javascript_server_error@sinclinal.com</a></p>
+
+<h1>
+<a name="list-emails-separate-with-comma-example-johngmailsmithgmail" class="anchor" href="#list-emails-separate-with-comma-example-johngmailsmithgmail"><span class="octicon octicon-link"></span></a>List emails separate with comma example john@gmail,smith@gmail</h1>
+
+<p>to = <a href="mailto:john.smith@gmail.com">john.smith@gmail.com</a></p>
+
+<h1>
+<a name="config-date" class="anchor" href="#config-date"><span class="octicon octicon-link"></span></a>config date</h1>
+
+<p>date_format=YYYY-MM-DD HH:mm:ss</p>
+
+<h2>
+<a name="configuration-mongodb-1" class="anchor" href="#configuration-mongodb-1"><span class="octicon octicon-link"></span></a>Configuration Mongodb</h2>
+
+<p>Automatic configuration:</p>
+
+<ul>
+<li>Creation of DB automatic</li>
+<li>Creation collection automatic</li>
+<li>Independent collections by App</li>
+</ul><h2>
+<a name="access-server" class="anchor" href="#access-server"><span class="octicon octicon-link"></span></a>Access server</h2>
+
+<ul>
+<li>http://my_server:port_server (and login)</li>
+</ul><p>Init web:</p>
 
 <p><img src="https://raw.githubusercontent.com/warsclon/Javascript-Server-Error-And-Log/gh-pages/captures/1.jpg" alt=""></p>
 
@@ -112,6 +269,32 @@ result:{"insert":"ok"}
 <p>Delete:</p>
 
 <p><img src="https://raw.githubusercontent.com/warsclon/Javascript-Server-Error-And-Log/gh-pages/captures/9.jpg" alt=""></p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>( The MIT License )</p>
+
+<p>Copyright (c) 2014 Diego Martin Moreno </p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. </p>
       </section>
     </div>
 
